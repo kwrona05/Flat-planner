@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Stage, Layer, Rect, Text } from "react-konva";
 import "../App.css";
+import Header from "./Header";
 
 type Shape = {
   id: string;
@@ -13,8 +14,6 @@ type Shape = {
 };
 
 const Main: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isopenLegend, setIsOpenLegend] = useState<boolean>(false);
   const [shapes, setShapes] = useState<Shape[]>([]);
 
   const handleDragEnd = (e: any, id: string) => {
@@ -37,43 +36,10 @@ const Main: React.FC = () => {
     setShapes([...shapes, newShape]);
   };
 
-  const openForm = (): void => {
-    setIsOpen((prevState) => !prevState);
-  };
-
-  const openLegend = (): void => {
-    setIsOpenLegend((prevState) => !prevState);
-  };
-
   return (
     <div className="container">
       <div className="header">
-        <button onClick={openForm}>Instruction</button>
-        {isOpen && (
-          <form>
-            <p>You can add new room by clicking '+' button</p>
-            <p>
-              You can remove room by clicking on it and then clicking remove
-            </p>
-            <p>You can drag room on the canvas by holding the mouse on it</p>
-            <p>You can see the legend by clicking 'Legend' button</p>
-            <p>You can download your flat by clicking 'Download' button</p>
-          </form>
-        )}
-        <button onClick={openLegend}>Legend</button>
-        {isopenLegend && (
-          <form>
-            <p>Corridor - Gray</p>
-            <p>Living room - Red</p>
-            <p>Kitchen - Orange</p>
-            <p>Bathroom - Blue</p>
-            <p>Office - Green</p>
-            <p>Bedroom - Yellow</p>
-          </form>
-        )}
-        {/*remove button*/}
-        {/*download button*/}
-        {/*add button*/}
+        <Header />
       </div>
       <div className="stage-container">
         <button onClick={() => addRect("square")}>+</button>
