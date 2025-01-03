@@ -36,6 +36,11 @@ const Main: React.FC = () => {
     setShapes([...shapes, newShape]);
   };
 
+  const removeShape = (id: string) => {
+    const updatedShapes = shapes.filter((shape) => shape.id !== id);
+    setShapes(updatedShapes);
+  };
+
   return (
     <div className="container">
       <div className="header">
@@ -43,7 +48,10 @@ const Main: React.FC = () => {
       </div>
       <div className="stage-container">
         <button onClick={() => addRect("square")}>+</button>
-        <Stage width={600} height={400}>
+        <button onClick={() => removeShape(shapes[shapes.length - 1].id)}>
+          Remove
+        </button>
+        <Stage width={800} height={500}>
           <Layer>
             {shapes.map((shape) => (
               <Rect
