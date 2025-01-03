@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-const Header = () => {
+import "../App.css";
+const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isopenLegend, setIsOpenLegend] = useState<boolean>(false);
 
@@ -12,9 +13,9 @@ const Header = () => {
   };
   return (
     <div>
-      <button onClick={openForm}>Instruction</button>;
+      <button onClick={openForm}>Instruction</button>
       {isOpen && (
-        <form>
+        <form className="instruction">
           <p>You can add new room by clicking '+' button</p>
           <p>You can remove room by clicking on it and then clicking remove</p>
           <p>You can drag room on the canvas by holding the mouse on it</p>
@@ -22,9 +23,9 @@ const Header = () => {
           <p>You can download your flat by clicking 'Download' button</p>
         </form>
       )}
-      <button onClick={openLegend}>Legend</button>;
+      <button onClick={openLegend}>Legend</button>
       {isopenLegend && (
-        <form>
+        <form className="legend">
           <p>Corridor - Gray</p>
           <p>Living room - Red</p>
           <p>Kitchen - Orange</p>

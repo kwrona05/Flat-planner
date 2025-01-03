@@ -2,11 +2,37 @@
     margin: 0 auto;
     box-sizing: border-box;
 }
+
+.container {
+    width: 100vh;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    height: 100px;
+    width: 100vh;
+}
+
 .stage-container {
-    width: 600px;
-    height: 400px;
+    width: 800px;
+    height: 500px;
     border: 1px solid black;
     margin: "20px auto";
     position: relative;
     overflow: "hidden";
+}
+
+.instruction, .legend{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    padding: '10px';
+    z-index: 10;
 }
