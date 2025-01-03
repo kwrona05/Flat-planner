@@ -1,38 +1,133 @@
 * {
-    margin: 0 auto;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-}
-
-.container {
-    width: 100vh;
-    height: 100vh;
-}
-
-.header {
+  }
+  
+  body {
+    font-family: "Arial", sans-serif;
+    background: #273d3d;
+    color: #333;
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    height: 100px;
-    width: 100vh;
-}
-
-.stage-container {
-    width: 800px;
-    height: 500px;
-    border: 1px solid black;
-    margin: "20px auto";
-    position: relative;
-    overflow: "hidden";
-}
-
-.instruction, .legend{
-    display: grid;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  .header-component {
+    width: 1440px;
+    background: #203030;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+    border-bottom: 1px solid #f44336;
+  }
+  
+  .header-button {
+    background: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s ease;
+  }
+  
+  .header-button:hover {
+    background: #005fa3;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 20px;
+  }
+  
+  .stage-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button:active {
+    background-color: #3e8e41;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button + button {
+    background-color: #f44336;
+  }
+  
+  button + button:hover {
+    background-color: #e41f1f;
+  }
+  
+  .instruction,
+  .legend {
+    background: white;
+    color: #333;
+    padding: 15px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
     position: absolute;
-    background-color: white;
-    border: 1px solid black;
-    padding: '10px';
-    z-index: 10;
-}
+    top: 100px;
+  }
+  
+  .instruction p,
+  .legend p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }

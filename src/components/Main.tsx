@@ -47,11 +47,13 @@ const Main: React.FC = () => {
         <Header />
       </div>
       <div className="stage-container">
-        <button onClick={() => addRect("square")}>+</button>
-        <button onClick={() => removeShape(shapes[shapes.length - 1].id)}>
-          Remove
-        </button>
-        <Stage width={800} height={500}>
+        <div>
+          <button onClick={() => addRect("square")}>+</button>
+          <button onClick={() => removeShape(shapes[shapes.length - 1].id)}>
+            Remove
+          </button>
+        </div>
+        <Stage width={1000} height={600}>
           <Layer>
             {shapes.map((shape) => (
               <Rect

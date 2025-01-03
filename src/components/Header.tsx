@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     setIsOpenLegend((prevState) => !prevState);
   };
   return (
-    <div>
+    <div className="header-component">
       <button onClick={openForm}>Instruction</button>
       {isOpen && (
         <form className="instruction">
