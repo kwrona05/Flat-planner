@@ -15,7 +15,8 @@ type Shape = {
 
 const Main: React.FC = () => {
   const [shapes, setShapes] = useState<Shape[]>([]);
-  const stageRef = useRef<any>(null); // Dodano typ `any` dla stageRef
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const stageRef = useRef<any>(null);
 
   const handleDragEnd = (e: any, id: string) => {
     const updateShapes = shapes.map((shape) =>
@@ -37,9 +38,16 @@ const Main: React.FC = () => {
     setShapes([...shapes, newShape]);
   };
 
-  const removeShape = (id: string) => {
-    const updatedShapes = shapes.filter((shape) => shape.id !== id);
-    setShapes(updatedShapes);
+  const removeSelectedShape = () => {
+    if (selectedId) {
+      const updateShapes = shapes.filter((shape) => shape.id !== selectedId);
+      setShapes(updateShapes);
+      setSelectedId(null);
+    }
+  };
+
+  const handleSelect = (id: string) => {
+    setSelectedId(id);
   };
 
   const downloadButton = (uri: string, name: string) => {
@@ -68,11 +76,7 @@ const Main: React.FC = () => {
       <div className="stage-container">
         <div>
           <button onClick={() => addRect("square")}>+</button>
-          <button
-            onClick={() =>
-              shapes.length > 0 && removeShape(shapes[shapes.length - 1].id)
-            }
-          >
+          <button onClick={removeSelectedShape} disabled={!selectedId}>
             Remove
           </button>
           <button onClick={handleExport}>Export</button>
@@ -87,8 +91,9 @@ const Main: React.FC = () => {
                 y={shape.y}
                 width={shape.width}
                 height={shape.height}
-                fill={shape.color}
+                fill={shape.id === selectedId ? "red" : shape.color}
                 draggable
+                onClick={() => handleSelect(shape.id)}
                 onDragEnd={(e) => handleDragEnd(e, shape.id)}
               />
             ))}
