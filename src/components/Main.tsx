@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Stage, Layer, Rect, Text } from "react-konva";
+import React, { useState, useRef } from "react";
+import { Stage, Layer, Rect } from "react-konva";
 import "../App.css";
 import Header from "./Header";
 
@@ -15,6 +15,7 @@ type Shape = {
 
 const Main: React.FC = () => {
   const [shapes, setShapes] = useState<Shape[]>([]);
+  const stageRef = useRef<any>(null); // Dodano typ `any` dla stageRef
 
   const handleDragEnd = (e: any, id: string) => {
     const updateShapes = shapes.map((shape) =>
@@ -41,6 +42,24 @@ const Main: React.FC = () => {
     setShapes(updatedShapes);
   };
 
+  const downloadButton = (uri: string, name: string) => {
+    const link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExport = () => {
+    if (stageRef.current) {
+      const uri = stageRef.current.toDataURL();
+      downloadButton(uri, "stage-export.png");
+    } else {
+      console.error("stageRef.current is null");
+    }
+  };
+
   return (
     <div className="container">
       <div className="header">
@@ -49,11 +68,17 @@ const Main: React.FC = () => {
       <div className="stage-container">
         <div>
           <button onClick={() => addRect("square")}>+</button>
-          <button onClick={() => removeShape(shapes[shapes.length - 1].id)}>
+          <button
+            onClick={() =>
+              shapes.length > 0 && removeShape(shapes[shapes.length - 1].id)
+            }
+          >
             Remove
           </button>
+          <button onClick={handleExport}>Export</button>
         </div>
-        <Stage width={1000} height={600}>
+        <Stage width={1000} height={600} ref={stageRef}>
+          {/* Dodano ref do Stage */}
           <Layer>
             {shapes.map((shape) => (
               <Rect
@@ -73,4 +98,5 @@ const Main: React.FC = () => {
     </div>
   );
 };
+
 export default Main;
