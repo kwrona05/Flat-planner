@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import "../App.css";
-const Header: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isopenLegend, setIsOpenLegend] = useState<boolean>(false);
+import React from "react";
 
-  const openForm = (): void => {
-    setIsOpen((prevState) => !prevState);
-  };
+type HeaderProps = {
+  addRect: (type: "square", name: string, color: string) => void;
+  removeSelectedShape: () => void;
+  handleExport: () => void;
+  selectedId: string | null;
+};
 
-  const openLegend = (): void => {
-    setIsOpenLegend((prevState) => !prevState);
-  };
+const Header: React.FC<HeaderProps> = ({
+  addRect,
+  removeSelectedShape,
+  handleExport,
+  selectedId,
+}) => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [isopenLegend, setIsOpenLegend] = React.useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
+
+  const openForm = (): void => setIsOpen((prevState) => !prevState);
+  const openLegend = (): void => setIsOpenLegend((prevState) => !prevState);
+  const openMenuButton = (): void => setIsMenuOpen((prevState) => !prevState);
+
   return (
     <div className="header-component">
       <button onClick={openForm}>Instruction</button>
@@ -34,10 +44,35 @@ const Header: React.FC = () => {
           <p>Bedroom - Yellow</p>
         </form>
       )}
-      {/*remove button*/}
-      {/*download button*/}
-      {/*add button*/}
+      <button onClick={openMenuButton}>+</button>
+      {isMenuOpen && (
+        <menu>
+          <button onClick={() => addRect("square", "LivingRoom", "red")}>
+            Living Room
+          </button>
+          <button onClick={() => addRect("square", "Corridor", "gray")}>
+            Corridor
+          </button>
+          <button onClick={() => addRect("square", "Bedroom", "yellow")}>
+            Bedroom
+          </button>
+          <button onClick={() => addRect("square", "Kitchen", "orange")}>
+            Kitchen
+          </button>
+          <button onClick={() => addRect("square", "Bathroom", "blue")}>
+            Bathroom
+          </button>
+          <button onClick={() => addRect("square", "Office", "green")}>
+            Office
+          </button>
+        </menu>
+      )}
+      <button onClick={removeSelectedShape} disabled={!selectedId}>
+        Remove
+      </button>
+      <button onClick={handleExport}>Export</button>
     </div>
   );
 };
+
 export default Header;
