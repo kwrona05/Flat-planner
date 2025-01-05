@@ -7,6 +7,7 @@ type Shape = {
   id: string;
   x: number;
   y: number;
+  name: string;
   width: number;
   height: number;
   color: string;
@@ -16,6 +17,7 @@ type Shape = {
 const Main: React.FC = () => {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
 
@@ -57,14 +59,19 @@ const Main: React.FC = () => {
     node.scaleY(1);
   };
 
-  const addRect = (type: "square") => {
+  const openMenuButton = (): void => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
+
+  const addRect = (type: "square", name: string, color: string) => {
     const newShape: Shape = {
       id: `shape-${shapes.length + 1}`,
       width: 100,
       height: 100,
       x: 50,
       y: 50,
-      color: "gray",
+      name: "corridor",
+      color: `${color}`,
       type: "square",
     };
     setShapes([...shapes, newShape]);
@@ -107,7 +114,29 @@ const Main: React.FC = () => {
       </div>
       <div className="stage-container">
         <div>
-          <button onClick={() => addRect("square")}>+</button>
+          <button onClick={openMenuButton}>+</button>
+          {isMenuOpen && (
+            <menu>
+              <button onClick={() => addRect("square", "LivingRoom", "red")}>
+                Living Room
+              </button>
+              <button onClick={() => addRect("square", "Corridor", "gray")}>
+                Corridor
+              </button>
+              <button onClick={() => addRect("square", "Bedroom", "yellow")}>
+                Bedroom
+              </button>
+              <button onClick={() => addRect("square", "Kitchen", "orange")}>
+                Kitchen
+              </button>
+              <button onClick={() => addRect("square", "Bathroom", "blue")}>
+                Bathroom
+              </button>
+              <button onClick={() => addRect("square", "Office", "green")}>
+                Office
+              </button>
+            </menu>
+          )}
           <button onClick={removeSelectedShape} disabled={!selectedId}>
             Remove
           </button>
