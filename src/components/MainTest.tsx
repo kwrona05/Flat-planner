@@ -14,7 +14,7 @@ type Shape = {
   type: "square";
 };
 
-const Main: React.FC = () => {
+const MainTest: React.FC = () => {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -167,4 +167,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default MainTest;
